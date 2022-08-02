@@ -1,21 +1,20 @@
-using EasyNetQ;
+using System.Reflection;
+using Fibonacci.Application;
 using Fibonacci.Contract;
-using Fibonacci.Services;
-using Fibonacci.Storage;
+using Fibonacci.Infrastructure;
 using FluentValidation;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
-builder.Services.AddSingleton<IRepo, Repo>();
-builder.Services.AddSingleton<ITaskListener, TaskListener>();
-builder.Services.AddHttpClient<IHttpClientService, HttpClientService>();// todo верно ли
-builder.Services.AddScoped<IHttpClientService, HttpClientService>();
-builder.Services.AddHostedService<FibonacciBackgroundService>();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
+
 builder.Services.AddScoped<IValidator<int>, RequestValidator>(); // todo верно ли
-builder.Services.Configure<HttpClientSettings>(builder.Configuration.GetSection(nameof(HttpClientSettings)));
-builder.Services.AddSingleton(RabbitHutch.CreateBus("host=localhost:5672;username=guest;password=guest"));//todo
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

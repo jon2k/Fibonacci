@@ -1,7 +1,6 @@
-using System.Net;
-using Common;
-using Fibonacci.Services;
-using Fibonacci.Storage;
+using Fibonacci.Application.Command;
+using Fibonacci.Application.Query;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fibonacci.Controllers;
@@ -10,47 +9,52 @@ namespace Fibonacci.Controllers;
 [Route("api/[controller]")]
 public class FibonacciFirstController : ControllerBase
 {
-    private readonly IRepo _repo;
-    private readonly ITaskListener _taskListener;
-    private readonly IHttpClientService _httpClientService;
     private readonly ILogger<FibonacciFirstController> _logger;
+    private readonly IMediator _mediator;
 
-    public FibonacciFirstController(IRepo repo, ITaskListener taskListener, IHttpClientService httpClientService, ILogger<FibonacciFirstController> logger)
+    public FibonacciFirstController(ILogger<FibonacciFirstController> logger, IMediator mediator)
     {
-        _repo = repo;
-        _taskListener = taskListener;
-        _httpClientService = httpClientService;
         _logger = logger;
+        _mediator = mediator;
     }
 
     /// <summary>
-    /// todo
+    /// Action to get fibonacci numbers
     /// </summary>
-    /// <param name="number"></param>
-    /// <returns></returns>
+    /// <param name="number">Amount of numbers</param>
+    /// <returns>Returns a list of fibonacci numbers</returns>
     [HttpGet("{number}")]
     public async Task<IActionResult> Get(int number)
     {
-        if (_repo.HasNumber(number))
+        try
         {
-            return Ok(_repo.GetAllFibNumber(number));
+            var result = await _mediator.Send(new GetFibNumbersQuery(number));
+            return Ok(result);
         }
-        else
+        catch (Exception e)
         {
-            // _taskListener.StartListener(number); // todo в отдельный сервис
-            var oneFibNumberWithPrev = _repo.GetMaxSaveNumber();
-            var message = new MessageRequestFib(
-                TaskNumber: number,
-                Number: oneFibNumberWithPrev.Number + 1,
-                Fib: oneFibNumberWithPrev.Fib,
-                PrevFib: oneFibNumberWithPrev.PrevFib);
-            var result = await _httpClientService.SendDataAsync(message, HttpContext.RequestAborted);
-            if (result!= HttpStatusCode.OK)
-            {
-                return BadRequest("calculation is not possible. Service problem");
-            }
+            _logger.LogError(e.Message);
+            return BadRequest(e.Message);
+        }
+    }
 
-            return Ok("Calculation has started. Check back later for results.");
+    /// <summary>
+    /// Action to calculate fibonacci numbers
+    /// </summary>
+    /// <param name="number">Amount of numbers</param>
+    /// <returns></returns>
+    [HttpPost]
+    public async Task<IActionResult> Post(int number)
+    {
+        try
+        {
+            var result = await _mediator.Send(new StartCalculateCommand(number));
+            return Ok(result.ToString());
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return BadRequest(e.Message);
         }
     }
 }

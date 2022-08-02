@@ -1,5 +1,6 @@
-using Common;
-using FibonacciSecond.Services;
+using Common.Contract;
+using FibonacciSecond.Application.Command;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FibonacciSecond.Controllers;
@@ -8,22 +9,17 @@ namespace FibonacciSecond.Controllers;
 [Route("api/[controller]")]
 public class FibonacciSecondController : ControllerBase
 {
-    private readonly IMessagesBus _messagesBus;
-    private readonly ICalculateSum _calculateSum;
+    private readonly IMediator _mediator;
     private readonly ILogger<FibonacciSecondController> _logger;
 
-    public FibonacciSecondController(
-        IMessagesBus messagesBus, 
-        ICalculateSum calculateSum,
-        ILogger<FibonacciSecondController> logger)
+    public FibonacciSecondController(IMediator mediator, ILogger<FibonacciSecondController> logger)
     {
-        _messagesBus = messagesBus;
-        _calculateSum = calculateSum;
+        _mediator = mediator;
         _logger = logger;
     }
 
     /// <summary>
-    /// todo
+    /// Action to sum two numbers
     /// </summary>
     /// <param name="messageRequest"></param>
     /// <returns></returns>
@@ -32,9 +28,8 @@ public class FibonacciSecondController : ControllerBase
     {
         try
         {
-            var sum = _calculateSum.Sum(messageRequest);
-            await _messagesBus.SendMessageAsync(sum, HttpContext.RequestAborted);
-            return Ok();
+            var result = await _mediator.Send(new CalculateCommand(messageRequest));
+            return Ok(result);
         }
         catch (Exception e)
         {

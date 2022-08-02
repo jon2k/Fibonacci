@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="84de80ff-7b80-4100-9b0a-8ae998aaf791" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Common/Contract/MessageRequestFib.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Common/Contract/MessageResponseFib.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Command/StartCalculateCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Command/StartCalculateCommandHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Composer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Interfaces/ISenderService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Query/GetFibNumbersQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Query/GetFibNumbersQueryHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/SenderService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Infrastructure/Composer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FibonacciSecond/Application/Command/CalculateCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FibonacciSecond/Application/Command/CalculateCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Fibonacci.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../Fibonacci.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Common/Class1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Consumer/Consumer.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Consumer/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/FibonacciFirstController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/FibonacciFirstController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FibonacciFirst.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/FibonacciFirst.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/FibonacciBackgroundService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/FibBackgroundWorker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/HttpClientService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/HttpClientService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/HttpClientSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Settings/HttpClientSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/IHttpClientService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Interfaces/IHttpClientService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/TaskCalculation.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/TaskListener.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/IRepo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Interfaces/IRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Repo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Repository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/.dockerignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/Contract/MessageRequestFib.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/Controllers/FibonacciSecondController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../FibonacciSecond/Controllers/FibonacciSecondController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../FibonacciSecond/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/Exceptions/FirstGreaterThanSecondException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../FibonacciSecond/Domain/Exceptions/FirstGreaterThanSecondException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/Exceptions/NegativeNumberException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../FibonacciSecond/Domain/Exceptions/NegativeNumberException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/FibonacciSecond.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../FibonacciSecond/FibonacciSecond.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../FibonacciSecond/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../FibonacciSecond/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/Services/CalculateSum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../FibonacciSecond/Domain/CalculateSum.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/Services/ICalculateSum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../FibonacciSecond/Domain/ICalculateSum.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/Services/IMessagesBus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../FibonacciSecond/Application/Interfaces/IMessagesBus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/Services/MessagesBus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../FibonacciSecond/Infrastructure/MessagesBus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FibonacciSecond/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../FibonacciSecond/appsettings.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="2CodtlHTyms9lhIIQ1X6nEFN2LG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <created>1659473088214</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1659473088214</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
