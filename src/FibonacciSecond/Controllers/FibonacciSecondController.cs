@@ -1,4 +1,4 @@
-using FibonacciSecond.Request;
+using Common;
 using FibonacciSecond.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +12,9 @@ public class FibonacciSecondController : ControllerBase
     private readonly ICalculateSum _calculateSum;
     private readonly ILogger<FibonacciSecondController> _logger;
 
-    public FibonacciSecondController(IMessagesBus messagesBus, ICalculateSum calculateSum,
+    public FibonacciSecondController(
+        IMessagesBus messagesBus, 
+        ICalculateSum calculateSum,
         ILogger<FibonacciSecondController> logger)
     {
         _messagesBus = messagesBus;
@@ -23,14 +25,14 @@ public class FibonacciSecondController : ControllerBase
     /// <summary>
     /// todo
     /// </summary>
-    /// <param name="request"></param>
+    /// <param name="messageRequest"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] RequestFib request)
+    public async Task<IActionResult> Post([FromBody] MessageRequestFib messageRequest)
     {
         try
         {
-            var sum = _calculateSum.Sum(request);
+            var sum = _calculateSum.Sum(messageRequest);
             await _messagesBus.SendMessageAsync(sum, HttpContext.RequestAborted);
             return Ok();
         }

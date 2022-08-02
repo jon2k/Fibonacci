@@ -1,8 +1,9 @@
-﻿using FibonacciSecond.Request;
+﻿using Common;
+using FibonacciSecond.Contract;
 
 namespace FibonacciSecond.Services;
 
 public interface IMessagesBus
 {
-    public Task SendMessageAsync(ResponseFib responseFib, CancellationToken cancellationToken);
+    public Task SendMessageAsync(MessageResponseFib messageResponseFib, CancellationToken cancellationToken);
 }

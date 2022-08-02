@@ -10,7 +10,13 @@
 
     <ItemGroup>
         <PackageReference Include="EasyNetQ" Version="7.0.0" />
+        <PackageReference Include="EasyNetQ.Serialization.NewtonsoftJson" Version="7.0.0" />
+        <PackageReference Include="FluentValidation" Version="11.1.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Common\Common.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
-﻿using EasyNetQ;
-using FibonacciSecond.Request;
+﻿using Common;
+using EasyNetQ;
+using FibonacciSecond.Contract;
 
 namespace FibonacciSecond.Services;
 
@@ -14,9 +15,9 @@ internal class MessagesBus : IMessagesBus
         _logger = logger;
     }
 
-    public async Task SendMessageAsync(ResponseFib responseFib, CancellationToken cancellationToken)
+    public async Task SendMessageAsync(MessageResponseFib messageResponseFib, CancellationToken cancellationToken)
     {
-        await _bus.PubSub.PublishAsync(responseFib, "MyTopic", cancellationToken);
-        _logger.LogInformation($"Send into Messages Bus {responseFib.Number}"); // todo логи к одному виду
+        await _bus.PubSub.PublishAsync(messageResponseFib, cancellationToken); // todo нужно ли убивать его
+        _logger.LogInformation($"Send into Messages Bus {messageResponseFib.TaskNumber}"); // todo логи к одному виду
     }
 }

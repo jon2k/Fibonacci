@@ -1,8 +1,9 @@
-﻿using FibonacciSecond.Request;
+﻿using Common;
+using FibonacciSecond.Contract;
 
 namespace FibonacciSecond.Services;
 
 public interface ICalculateSum
 {
-    public ResponseFib Sum(RequestFib requestFib);
+    public MessageResponseFib Sum(MessageRequestFib request);
 }

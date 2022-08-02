@@ -1,5 +1,5 @@
-﻿using FibonacciSecond.Exceptions;
-using FibonacciSecond.Request;
+﻿using Common;
+using FibonacciSecond.Exceptions;
 
 namespace FibonacciSecond.Services;
 
@@ -12,17 +12,17 @@ internal class CalculateSum : ICalculateSum
         _logger = logger;
     }
 
-    public ResponseFib Sum(RequestFib requestFib)
+    public MessageResponseFib Sum(MessageRequestFib request)
     {
         try
         {
-            if (requestFib.Number < 0 || requestFib.First < 0 || requestFib.Second < 0)
+            if (request.Number < 0 || request.PrevFib < 0 || request.Fib < 0)
             {
                 _logger.LogError("Number cannot be negative");
                 throw new NegativeNumberException("Number cannot be negative");
             }
 
-            if (requestFib.First > requestFib.Second)
+            if (request.PrevFib > request.Fib)
             {
                 _logger.LogError("The first number cannot be greater than the second");
                 throw new FirstGreaterThanSecondException("The first number cannot be greater than the second");
@@ -30,8 +30,11 @@ internal class CalculateSum : ICalculateSum
 
             checked
             {
-                var sum = requestFib.First + requestFib.Second;
-                return new ResponseFib(requestFib.Number, sum);
+                var sum = request.PrevFib + request.Fib;
+                return new MessageResponseFib(
+                    TaskNumber: request.TaskNumber,
+                    CurrentNumber: request.Number,
+                    Sum: sum);
             }
         }
         catch (OverflowException e)
