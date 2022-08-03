@@ -1,28 +1,30 @@
 ﻿using Common.Contract;
-using FibonacciSecond.Services;
+using FibonacciSecond.Application.Interfaces;
+using FibonacciSecond.Domain.Interfaces;
 using MediatR;
 
 namespace FibonacciSecond.Application.Command;
 
-internal sealed class CalculateCommandHandler: IRequestHandler<CalculateCommand, MessageResponseFib>
+internal sealed class CalculateCommandHandler : IRequestHandler<CalculateCommand, MessageResponseFib>
 {
-    private readonly IMessagesBus _messagesBus;
+    private readonly IFibProducer<MessageResponseFib> _producer;
     private readonly ICalculateSum _calculateSum;
     private readonly ILogger<CalculateCommandHandler> _logger;
 
-    public CalculateCommandHandler( IMessagesBus messagesBus, 
+    public CalculateCommandHandler(IFibProducer<MessageResponseFib> producer,
         ICalculateSum calculateSum,
         ILogger<CalculateCommandHandler> logger)
     {
-        _messagesBus = messagesBus;
+        _producer = producer;
         _calculateSum = calculateSum;
         _logger = logger;
     }
+
     public async Task<MessageResponseFib> Handle(CalculateCommand request, CancellationToken cancellationToken)
     {
         var sum = _calculateSum.Sum(request.MessageRequestFib);
-        await _messagesBus.SendMessageAsync(sum, cancellationToken);
-      
+        await _producer.PublishAsync(sum, cancellationToken);
+
         return sum;
     }
 }

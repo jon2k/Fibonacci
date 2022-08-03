@@ -1,45 +1,30 @@
 ﻿using Common.Contract;
-using EasyNetQ;
 using Fibonacci.Application.Interfaces;
 
 namespace Fibonacci.Application.Services;
 
 internal class FibBackgroundWorker : BackgroundService
 {
-    private readonly IBus _bus;
-    private readonly IRepository _repository;
-    private readonly ISenderService _senderService;
+    private readonly ILogger<FibBackgroundWorker> _logger;
+    private readonly IFibConsumer<MessageResponseFib> _fibConsumer;
 
-    public FibBackgroundWorker(IServiceProvider serviceProvider, IBus bus, IRepository repository)
+    public FibBackgroundWorker(IFibConsumer<MessageResponseFib> fibConsumer, ILogger<FibBackgroundWorker> logger)
     {
-        _bus = bus;
-        _repository = repository;
-        _senderService = serviceProvider.CreateScope().ServiceProvider.GetRequiredService<ISenderService>();
+        _fibConsumer = fibConsumer;
+        _logger = logger;
     }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        _bus.PubSub.SubscribeAsync<MessageResponseFib>("test", Handler);
+        _fibConsumer.SubscribeAsync("test", stoppingToken);
+        _logger.LogInformation("Consumer subscribed to events");
 
         return Task.CompletedTask;
     }
 
-    public override void Dispose() // todo
+    public override void Dispose()
     {
-        _bus.Dispose();
+        _fibConsumer.Dispose();
         base.Dispose();
-    }
-
-    private async Task Handler(MessageResponseFib arg)
-    {
-        if (!_repository.HasNumber(arg.CurrentNumber)) // Exactly once
-        {
-            if (arg.TaskNumber >= arg.CurrentNumber)
-            {
-                _repository.AddFibNumber(arg.CurrentNumber, arg.Sum);
-
-                await _senderService.SendAsync(arg.TaskNumber, CancellationToken.None);
-            }
-        }
     }
 }

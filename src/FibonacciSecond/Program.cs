@@ -1,20 +1,18 @@
 using System.Reflection;
-using Common.Contract;
-using EasyNetQ;
-using FibonacciSecond.Application.Command;
+using FibonacciSecond.Application;
 using FibonacciSecond.Domain;
 using FibonacciSecond.Infrastructure;
-using FibonacciSecond.Services;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-builder.Services.AddScoped<IRequestHandler<CalculateCommand, MessageResponseFib>, CalculateCommandHandler>();
-builder.Services.AddScoped<ICalculateSum, CalculateSum>();
-builder.Services.AddScoped<IMessagesBus, MessagesBus>();
-builder.Services.AddSingleton(RabbitHutch.CreateBus(builder.Configuration.GetConnectionString("RabbitMq")));
+
+builder.Services.AddDomain();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

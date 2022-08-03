@@ -1,5 +1,6 @@
 using Fibonacci.Application.Command;
 using Fibonacci.Application.Query;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +10,13 @@ namespace Fibonacci.Controllers;
 [Route("api/[controller]")]
 public class FibonacciFirstController : ControllerBase
 {
+    private readonly IValidator<int> _validator;
     private readonly ILogger<FibonacciFirstController> _logger;
     private readonly IMediator _mediator;
 
-    public FibonacciFirstController(ILogger<FibonacciFirstController> logger, IMediator mediator)
+    public FibonacciFirstController(IValidator<int> validator, ILogger<FibonacciFirstController> logger, IMediator mediator)
     {
+        _validator = validator;
         _logger = logger;
         _mediator = mediator;
     }
@@ -26,6 +29,12 @@ public class FibonacciFirstController : ControllerBase
     [HttpGet("{number}")]
     public async Task<IActionResult> Get(int number)
     {
+        var validResult = await _validator.ValidateAsync(number);
+        if (!validResult.IsValid)
+        {
+            return BadRequest("Number must be greater than 0 and less than 92");
+        }
+
         try
         {
             var result = await _mediator.Send(new GetFibNumbersQuery(number));
@@ -46,6 +55,12 @@ public class FibonacciFirstController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post(int number)
     {
+        var validResult = await _validator.ValidateAsync(number);
+        if (!validResult.IsValid)
+        {
+            return BadRequest("Number must be greater than 0 and less than 92");
+        }
+
         try
         {
             var result = await _mediator.Send(new StartCalculateCommand(number));

@@ -28,6 +28,7 @@ public class HttpClientService : IHttpClientService
         var client = _clientFactory.CreateClient();
         var request = new StringContent(JsonSerializer.Serialize(messageRequestFib), Encoding.UTF8, "application/json");
         var response = await client.PostAsync(_options.Value.Url, request, cancellationToken);
+       
         return response.StatusCode;
     }
 }

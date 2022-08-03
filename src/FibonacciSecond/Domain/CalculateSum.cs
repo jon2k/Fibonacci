@@ -1,6 +1,6 @@
 ﻿using Common.Contract;
 using FibonacciSecond.Domain.Exceptions;
-using FibonacciSecond.Services;
+using FibonacciSecond.Domain.Interfaces;
 
 namespace FibonacciSecond.Domain;
 

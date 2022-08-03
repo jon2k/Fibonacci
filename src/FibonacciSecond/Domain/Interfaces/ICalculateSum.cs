@@ -1,6 +1,6 @@
 ﻿using Common.Contract;
 
-namespace FibonacciSecond.Services;
+namespace FibonacciSecond.Domain.Interfaces;
 
 public interface ICalculateSum
 {

@@ -10,7 +10,11 @@ internal class Repository : IRepository
 
     public Repository()
     {
-        _list = new List<OneFibNumber>();
+        _list = new List<OneFibNumber>
+        {
+            new OneFibNumber(1, 0),
+            new OneFibNumber(2, 1)
+        };
     }
 
     public List<long> GetAllFibNumber(int number)
@@ -41,26 +45,18 @@ internal class Repository : IRepository
         }
     }
 
+    public OneFibNumber? GetLastFibNumber()
+    {
+        lock (_lock)
+        {
+            return _list.MaxBy(n => n.Number);
+        }
+    }
+
     public OneFibNumberWithPrev GetMaxSaveNumber()
     {
         lock (_lock)
         {
-            if (_list.Count == 0)
-            {
-                return new OneFibNumberWithPrev(
-                    Number: 0,
-                    Fib: 0,
-                    PrevFib: 0);
-            }
-
-            if (_list.Count == 1)
-            {
-                return new OneFibNumberWithPrev(
-                    Number: 1,
-                    Fib: 1,
-                    PrevFib: 0);
-            }
-
             return new OneFibNumberWithPrev(
                 Number: _list[_list.Count - 1].Number,
                 Fib: _list[_list.Count - 1].Fib,

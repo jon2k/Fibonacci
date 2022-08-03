@@ -1,6 +1,6 @@
 using System.Reflection;
 using Fibonacci.Application;
-using Fibonacci.Contract;
+using Fibonacci.Contract.Validations;
 using Fibonacci.Infrastructure;
 using FluentValidation;
 using MediatR;
@@ -9,11 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<IValidator<int>, NumberValidator>();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
-
-builder.Services.AddScoped<IValidator<int>, RequestValidator>(); // todo верно ли
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
