@@ -26,7 +26,8 @@ internal class SenderService : ISenderService
             Fib: oneFibNumberWithPrev.Fib,
             PrevFib: oneFibNumberWithPrev.PrevFib);
 
-        var result = await _httpClientService.SendDataAsync(message, cancellationToken);
-        _logger.LogInformation(result.ToString());
+        var httpStatusCode = await _httpClientService.SendDataAsync(message, cancellationToken);
+        
+        _logger.LogInformation("{StatusCode}",httpStatusCode.ToString());
     }
 }

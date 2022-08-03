@@ -42,7 +42,7 @@ public class FibonacciFirstController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            _logger.LogError("{Error}",e.Message);
             return BadRequest(e.Message);
         }
     }
@@ -68,7 +68,7 @@ public class FibonacciFirstController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            _logger.LogError("{Error}",e.Message);
             return BadRequest(e.Message);
         }
     }

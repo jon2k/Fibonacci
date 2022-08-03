@@ -37,22 +37,22 @@ internal class FibConsumer : IFibConsumer<MessageResponseFib>
                     }
                     else
                     {
-                        _logger.LogInformation($"Calculation for {message.TaskNumber} finished");
+                        _logger.LogInformation("Calculation for {TaskNumber} finished", message.TaskNumber);
                     }
                 }
                 else
                 {
-                    _logger.LogError($"Lost messages from messageBus. Stop computing Fibonacci number for {message.TaskNumber}");
+                    _logger.LogError("Lost messages from messageBus. Stop computing Fibonacci number for {TaskNumber}", message.TaskNumber);
                 }
             }
             else
             {
-                _logger.LogWarning($"Repeated message received for {message.TaskNumber}");
+                _logger.LogWarning("Repeated message received for {TaskNumber}", message.TaskNumber);
             }
         }
         catch (Exception e)
         {
-            _logger.LogError(e, $"Stop computing Fibonacci number for {message.TaskNumber}");
+            _logger.LogError(e, "Stop computing Fibonacci number for {TaskNumber}",message.TaskNumber );
         }
     }
 

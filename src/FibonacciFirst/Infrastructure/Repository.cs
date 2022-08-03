@@ -5,11 +5,13 @@ namespace Fibonacci.Infrastructure;
 
 internal class Repository : IRepository
 {
+    private readonly ILogger<Repository> _logger;
     private readonly List<OneFibNumber> _list;
     private readonly object _lock = new();
 
-    public Repository()
+    public Repository(ILogger<Repository> logger)
     {
+        _logger = logger;
         _list = new List<OneFibNumber>
         {
             new OneFibNumber(1, 0),
@@ -32,6 +34,7 @@ internal class Repository : IRepository
         lock (_lock)
         {
             _list.Add(new OneFibNumber(number, result));
+            _logger.LogInformation("Added {Number} - {Result} to Repository",number, result);
         }
     }
 
