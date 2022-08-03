@@ -10,9 +10,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "src\Common\Common
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F906DF28-3F2A-4F46-B78D-95410064D363}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciFirst.Tests", "FibonacciFirst.Tests\FibonacciFirst.Tests.csproj", "{608877C7-59CA-4044-BAA1-874CD533F964}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciFirst.Tests", "Tests\FibonacciFirst.Tests\FibonacciFirst.Tests.csproj", "{608877C7-59CA-4044-BAA1-874CD533F964}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciSecond.Tests", "FibonacciSecond.Tests\FibonacciSecond.Tests.csproj", "{F458CC94-1A24-4E1A-804D-059540A33F41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciSecond.Tests", "Tests\FibonacciSecond.Tests\FibonacciSecond.Tests.csproj", "{F458CC94-1A24-4E1A-804D-059540A33F41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
